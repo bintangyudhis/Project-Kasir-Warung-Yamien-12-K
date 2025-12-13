@@ -1,0 +1,14 @@
+[10-Nov-2025 05:32:30 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/mett6377/public_html/metime.web.id/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/mett6377/public_html/metime.web.id/vendor/composer/autoload_real.php(25): require()
+#1 /home/mett6377/public_html/metime.web.id/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home/mett6377/public_html/metime.web.id/public/index.php(14): require('/home/mett6377/...')
+#3 {main}
+  thrown in /home/mett6377/public_html/metime.web.id/vendor/composer/platform_check.php on line 22
+[10-Nov-2025 05:34:08 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/mett6377/public_html/metime.web.id/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/mett6377/public_html/metime.web.id/vendor/composer/autoload_real.php(25): require()
+#1 /home/mett6377/public_html/metime.web.id/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home/mett6377/public_html/metime.web.id/public/index.php(14): require('/home/mett6377/...')
+#3 {main}
+  thrown in /home/mett6377/public_html/metime.web.id/vendor/composer/platform_check.php on line 22
