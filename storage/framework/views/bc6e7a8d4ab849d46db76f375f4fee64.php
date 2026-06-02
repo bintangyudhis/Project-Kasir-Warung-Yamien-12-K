@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Kasir - Yammien 12K')</title>
+    <title><?php echo $__env->yieldContent('title', 'Kasir - Yammien 12K'); ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -102,49 +102,54 @@
         }
     </style>
 
-    @stack('styles')
-    @include('layouts.partials.modern-styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
+    <?php echo $__env->make('layouts.partials.modern-styles', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 </head>
 <body>
     <div class="container">
-        @include('components.sidebar')
+        <?php echo $__env->make('components.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <main class="main-content">
-            @if ($message = Session::get('success'))
+            <?php if($message = Session::get('success')): ?>
                 <div class="alert alert-success">
                     <i class="fa-solid fa-circle-check"></i>
-                    {{ $message }}
-                </div>
-            @endif
+                    <?php echo e($message); ?>
 
-            @if ($message = Session::get('error'))
+                </div>
+            <?php endif; ?>
+
+            <?php if($message = Session::get('error')): ?>
                 <div class="alert alert-error">
                     <i class="fa-solid fa-circle-exclamation"></i>
-                    {{ $message }}
-                </div>
-            @endif
+                    <?php echo e($message); ?>
 
-            @if ($message = Session::get('warning'))
+                </div>
+            <?php endif; ?>
+
+            <?php if($message = Session::get('warning')): ?>
                 <div class="alert alert-warning">
                     <i class="fa-solid fa-triangle-exclamation"></i>
-                    {{ $message }}
-                </div>
-            @endif
+                    <?php echo e($message); ?>
 
-            @if ($message = Session::get('info'))
+                </div>
+            <?php endif; ?>
+
+            <?php if($message = Session::get('info')): ?>
                 <div class="alert alert-info">
                     <i class="fa-solid fa-circle-info"></i>
-                    {{ $message }}
-                </div>
-            @endif
+                    <?php echo e($message); ?>
 
-            @yield('content')
+                </div>
+            <?php endif; ?>
+
+            <?php echo $__env->yieldContent('content'); ?>
         </main>
 
-        @yield('right-sidebar')
+        <?php echo $__env->yieldContent('right-sidebar'); ?>
     </div>
 
-    @include('layouts.partials.final-overrides')
-    @stack('scripts')
+    <?php echo $__env->make('layouts.partials.final-overrides', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/layouts/kasir.blade.php ENDPATH**/ ?>

@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Manajemen Menu - Yammien 12K'); ?>
 
-@section('title', 'Manajemen Menu - Yammien 12K')
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
     <style>
         body {
             overflow: hidden;
@@ -252,16 +250,16 @@
             }
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section class="header-section">
         <h2>Manajemen Menu</h2>
         <div class="menu-actions">
-            <a href="{{ route('products.create') }}" class="btn add">
+            <a href="<?php echo e(route('products.create')); ?>" class="btn add">
                 <i class="fa-solid fa-plus"></i> Tambah Menu
             </a>
-            <a href="{{ route('categories.index') }}" class="btn edit">
+            <a href="<?php echo e(route('categories.index')); ?>" class="btn edit">
                 <i class="fa-solid fa-list"></i> Kategori
             </a>
         </div>
@@ -269,32 +267,33 @@
 
     <section class="menu-list">
         <div class="cards">
-            @forelse ($products as $product)
+            <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="card">
                     <div class="img-placeholder">
-                        @if ($product->photo)
-                            <img src="{{ asset('storage/' . $product->photo) }}" alt="{{ $product->name }}">
-                        @else
+                        <?php if($product->photo): ?>
+                            <img src="<?php echo e(asset('storage/' . $product->photo)); ?>" alt="<?php echo e($product->name); ?>">
+                        <?php else: ?>
                             <i class="fa-solid fa-utensils" style="font-size: 48px; color: #ddd;"></i>
-                        @endif
+                        <?php endif; ?>
                     </div>
-                    <p class="title">{{ $product->name }}</p>
-                    <p class="desc">{{ $product->category->name ?? 'No Category' }}</p>
-                    <p class="price">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
-                    <p class="status {{ $product->stock_quantity > 0 ? 'tersedia' : 'tidak-tersedia' }}">
-                        {{ $product->stock_quantity > 0 ? 'Tersedia (' . $product->stock_quantity . ')' : 'Tidak Tersedia' }}
+                    <p class="title"><?php echo e($product->name); ?></p>
+                    <p class="desc"><?php echo e($product->category->name ?? 'No Category'); ?></p>
+                    <p class="price">Rp<?php echo e(number_format($product->price, 0, ',', '.')); ?></p>
+                    <p class="status <?php echo e($product->stock_quantity > 0 ? 'tersedia' : 'tidak-tersedia'); ?>">
+                        <?php echo e($product->stock_quantity > 0 ? 'Tersedia (' . $product->stock_quantity . ')' : 'Tidak Tersedia'); ?>
+
                     </p>
 
                     <div class="card-actions">
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">
+                        <a href="<?php echo e(route('products.show', $product->id)); ?>" class="btn btn-info btn-sm">
                             <i class="fa-solid fa-eye"></i> Lihat
                         </a>
-                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">
+                        <a href="<?php echo e(route('products.edit', $product->id)); ?>" class="btn btn-warning btn-sm">
                             <i class="fa-solid fa-pen"></i> Edit
                         </a>
-                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                        <form action="<?php echo e(route('products.destroy', $product->id)); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="btn btn-danger btn-sm"
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
                                 <i class="fa-solid fa-trash"></i> Hapus
@@ -302,14 +301,15 @@
                         </form>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
                     <i class="fa-solid fa-inbox" style="font-size: 64px; color: #ddd; margin-bottom: 20px; display: block;"></i>
                     <p style="color: #999; font-size: 16px;">Belum ada produk.</p>
                     <p style="color: #ccc; font-size: 14px; margin-top: 10px;">Klik tombol "Tambah Menu" untuk menambahkan
                         produk baru.</p>
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/products/index.blade.php ENDPATH**/ ?>

@@ -192,7 +192,7 @@
                         <i class="fas fa-exclamation"></i>
                     @endif
                 </div>
-                <div class="brand-title">Metime</div>
+                <div class="brand-title">Yammien 12K</div>
                 <div style="color: var(--text-muted); font-size: 0.9rem;">
                     @if($order->payment->status == 'paid')
                         Terima kasih atas pesanan Anda
@@ -283,9 +283,9 @@
 
 
     <div class="thermal-print-area">
-        <div class="thermal-center thermal-bold" style="font-size: 14px;">MeTime</div>
+        <div class="thermal-center thermal-bold" style="font-size: 14px;">Yammien 12K</div>
         <div class="thermal-center" style="font-size: 10px;">Delicious Moments</div>
-        <div class="thermal-center" style="font-size: 10px;">www.metime.web.id</div>
+        <div class="thermal-center" style="font-size: 10px;">www.yammien12k.web.id</div>
         <div class="thermal-divider"></div>
         
         <table class="thermal-table">
@@ -339,10 +339,10 @@
         qz.websocket.connect()
             .then(() => { 
                 qzConnected = true; 
-                console.log("✅ QZ Tray Connected"); 
+                console.log("QZ Tray Connected"); 
             })
             .catch((e) => { 
-                console.log("⚠️ QZ Tray not found, using browser print."); 
+                console.log("QZ Tray not found, using browser print."); 
             });
 
         function printReceipt() {
@@ -370,7 +370,7 @@
                 let data = [
                     '\x1B\x61\x01', // Center
                     '\x1B\x45\x01', // Bold
-                    'MeTime Resto\n',
+                    'Yammien 12K Resto\n',
                     '\x1B\x45\x00', // No Bold
                     'Delicious Moments\n',
                     '--------------------------------\n',

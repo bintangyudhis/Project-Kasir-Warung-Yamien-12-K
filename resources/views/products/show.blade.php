@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Detail Produk - MeTime')
+@section('title', 'Detail Produk - Yammien 12K')
 
 @push('styles')
 <style>

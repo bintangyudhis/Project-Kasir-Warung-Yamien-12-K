@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Kategori - Yammien 12K'); ?>
 
-@section('title', 'Kategori - Yammien 12K')
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
     <style>
         * {
             margin: 0;
@@ -286,39 +284,41 @@
             overflow: hidden;
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section class="header-section">
         <h2>Manajemen Kategori</h2>
         <div class="menu-actions">
-            <a href="{{ route('categories.create') }}" class="btn add">+ Tambah Kategori</a>
+            <a href="<?php echo e(route('categories.create')); ?>" class="btn add">+ Tambah Kategori</a>
         </div>
     </section>
 
     <section class="category-list">
         <div class="cards">
-            @forelse ($categories as $category)
+            <?php $__empty_1 = true; $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="card">
-                    <p class="category-id">#ID: {{ $category->id }}</p>
-                    <p class="title">{{ $category->name }}</p>
+                    <p class="category-id">#ID: <?php echo e($category->id); ?></p>
+                    <p class="title"><?php echo e($category->name); ?></p>
 
                     <div class="card-actions">
-                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                        <a href="<?php echo e(route('categories.edit', $category->id)); ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="<?php echo e(route('categories.destroy', $category->id)); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="btn btn-danger btn-sm"
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">Hapus</button>
                         </form>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div style="width: 100%; text-align: center; padding: 40px;">
                     <p style="color: #999;">Belum ada kategori. Klik tombol "Tambah Kategori" untuk menambahkan kategori
                         baru.</p>
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/categories/index.blade.php ENDPATH**/ ?>

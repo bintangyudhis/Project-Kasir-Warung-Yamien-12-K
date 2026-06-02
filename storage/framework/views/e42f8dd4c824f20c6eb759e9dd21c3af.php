@@ -22,60 +22,60 @@
     </div>
 
     <div class="profile">
-        @if (Auth::user()->photo)
-            <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Avatar" class="sidebar-avatar-img">
-        @else
+        <?php if(Auth::user()->photo): ?>
+            <img src="<?php echo e(asset('storage/' . Auth::user()->photo)); ?>" alt="Avatar" class="sidebar-avatar-img">
+        <?php else: ?>
             <div class="sidebar-avatar-placeholder">
                 <i class="fas fa-user"></i>
             </div>
-        @endif
+        <?php endif; ?>
 
-        <p class="role">{{ Auth::user()->role }}</p>
-        <p class="name">{{ Auth::user()->username }}</p>
+        <p class="role"><?php echo e(Auth::user()->role); ?></p>
+        <p class="name"><?php echo e(Auth::user()->username); ?></p>
     </div>
 
     <nav class="menu-nav">
-        <a href="{{ route('profile.show') }}" class="{{ request()->routeIs('profile.show') ? 'active' : '' }}">
+        <a href="<?php echo e(route('profile.show')); ?>" class="<?php echo e(request()->routeIs('profile.show') ? 'active' : ''); ?>">
             <i class="fa-solid fa-user-circle"></i> <span>Profil Saya</span>
         </a>
 
-        @if (Auth::user()->role === 'admin')
-            <a href="{{ route('orders.index') }}" class="{{ request()->routeIs('orders.index') ? 'active' : '' }}">
+        <?php if(Auth::user()->role === 'admin'): ?>
+            <a href="<?php echo e(route('orders.index')); ?>" class="<?php echo e(request()->routeIs('orders.index') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-cash-register"></i> <span>Kasir</span>
             </a>
-            <a href="{{ route('products.index') }}" class="{{ request()->routeIs('products.*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('products.index')); ?>" class="<?php echo e(request()->routeIs('products.*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-utensils"></i> <span>Manajemen Menu</span>
             </a>
-            <a href="{{ route('tables.index') }}" class="{{ request()->routeIs('tables.*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('tables.index')); ?>" class="<?php echo e(request()->routeIs('tables.*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-table"></i> <span>Manajemen Meja</span>
             </a>
-            <a href="{{ route('orders.history') }}" class="{{ request()->routeIs('orders.history') ? 'active' : '' }}">
+            <a href="<?php echo e(route('orders.history')); ?>" class="<?php echo e(request()->routeIs('orders.history') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-clock-rotate-left"></i> <span>Riwayat</span>
             </a>
-            <a href="{{ route('categories.index') }}" class="{{ request()->routeIs('categories.*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('categories.index')); ?>" class="<?php echo e(request()->routeIs('categories.*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-list"></i> <span>Kategori</span>
             </a>
-            <a href="{{ route('activity-logs.index') }}"
-                class="{{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('activity-logs.index')); ?>"
+                class="<?php echo e(request()->routeIs('activity-logs.*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-clipboard-list"></i> <span>Aktivitas Log</span>
             </a>
-            <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('users.index')); ?>" class="<?php echo e(request()->routeIs('users.*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-users-cog"></i> <span>Manajemen User</span>
             </a>
-        @elseif(Auth::user()->role === 'cashier')
-            <a href="{{ route('orders.index') }}" class="{{ request()->routeIs('orders.index') ? 'active' : '' }}">
+        <?php elseif(Auth::user()->role === 'cashier'): ?>
+            <a href="<?php echo e(route('orders.index')); ?>" class="<?php echo e(request()->routeIs('orders.index') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-utensils"></i> <span>Menu</span>
             </a>
-            <a href="{{ route('tables.index') }}" class="{{ request()->routeIs('tables.*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('tables.index')); ?>" class="<?php echo e(request()->routeIs('tables.*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-table"></i> <span>Manajemen Meja</span>
             </a>
-            <a href="{{ route('orders.history') }}" class="{{ request()->routeIs('orders.history*') ? 'active' : '' }}">
+            <a href="<?php echo e(route('orders.history')); ?>" class="<?php echo e(request()->routeIs('orders.history*') ? 'active' : ''); ?>">
                 <i class="fa-solid fa-clock-rotate-left"></i> <span>Riwayat</span>
             </a>
-        @endif
+        <?php endif; ?>
 
-        <form method="POST" action="{{ route('logout') }}" style="margin-top:auto;">
-            @csrf
+        <form method="POST" action="<?php echo e(route('logout')); ?>" style="margin-top:auto;">
+            <?php echo csrf_field(); ?>
             <button type="submit" class="logout-btn">
                 <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
             </button>
@@ -499,3 +499,4 @@
         document.body.classList.add('sidebar-collapsed');
     }
 </script>
+<?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/components/sidebar.blade.php ENDPATH**/ ?>

@@ -11,15 +11,13 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    
-    if (auth()->check()) {
-        return redirect()->route('dashboard');
-    }
-    
-    return view('auth/login');
+    return view('welcome');
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/kasir', function () {
+        return redirect()->route('dashboard');
+    })->name('kasir.entry');
     
     Route::get('/dashboard', function () {
 

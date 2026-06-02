@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pembayaran Midtrans - MeTime</title>
+    <title>Pembayaran Midtrans - Yammien 12K</title>
     @if(config('services.midtrans.isProduction'))
         <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
     @else

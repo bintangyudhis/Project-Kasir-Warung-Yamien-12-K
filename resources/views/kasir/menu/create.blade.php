@@ -1,6 +1,6 @@
 @extends('layouts.kasir')
 
-@section('title', 'Pembayaran - Kasir MeTime')
+@section('title', 'Pembayaran - Kasir Yammien 12K')
 
 @push('styles')
 <style>
@@ -92,6 +92,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
         }
 
 
@@ -99,6 +101,7 @@
             display: flex;
             gap: 20px;
             margin-top: 20px;
+            align-items: flex-start;
         }
 
         .daftar-pesanan {
@@ -112,10 +115,11 @@
             display: flex;
             align-items: center;
             background: #fff;
-            border-radius: 0px;
-            padding: 10px 20px;
+            border-radius: 8px;
+            padding: 14px;
             justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-sm);
         }
 
         .img-placeholder {
@@ -175,10 +179,11 @@
         .ringkasan {
             flex: 1;
             background: #fff;
-            border-radius: 0px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 22px;
             height: fit-content;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-sm);
         }
 
         .ringkasan h3 {
@@ -219,15 +224,16 @@
         }
 
         .btn-bayar {
-            background-color: #ff6633;
+            background: linear-gradient(135deg, var(--brand), #ff8a4c);
             color: white;
             border: none;
-            border-radius: 6px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 13px;
             width: 100%;
             margin-top: 20px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 800;
         }
 
         .btn-bayar:hover {
@@ -256,9 +262,9 @@
         }
 
         .input-section input {
-            padding: 8px 10px;
+            padding: 11px 12px;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             outline: none;
             transition: 0.2s;
         }
@@ -298,9 +304,9 @@
         }
 
         .input-section select {
-            padding: 8px 10px;
+            padding: 11px 12px;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             outline: none;
             transition: 0.2s;
             width: 100%;
@@ -311,6 +317,21 @@
         .input-section select:focus {
             border-color: #ff6633;
             box-shadow: 0 0 4px rgba(255, 102, 51, 0.3);
+        }
+
+        @media (max-width: 980px) {
+            .pesanan-container {
+                flex-direction: column;
+            }
+
+            .daftar-pesanan,
+            .ringkasan {
+                width: 100%;
+            }
+
+            .pesanan-item {
+                flex-wrap: wrap;
+            }
         }
     </style>
 @endpush

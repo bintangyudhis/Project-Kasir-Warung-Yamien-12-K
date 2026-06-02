@@ -156,7 +156,7 @@
             color: #fff;
             background:
                 linear-gradient(90deg, rgba(11, 18, 32, 0.88) 0%, rgba(11, 18, 32, 0.72) 38%, rgba(11, 18, 32, 0.22) 72%),
-                url("{{ asset('images/yammien-hero.png') }}") center / cover no-repeat;
+                url("<?php echo e(asset('images/yammien-hero.png')); ?>") center / cover no-repeat;
         }
 
         .hero-inner {
@@ -320,7 +320,7 @@
             border-radius: var(--radius);
             background:
                 linear-gradient(180deg, rgba(240, 90, 40, 0.08), rgba(24, 33, 47, 0.22)),
-                url("{{ asset('images/yammien-hero.png') }}") center / cover no-repeat;
+                url("<?php echo e(asset('images/yammien-hero.png')); ?>") center / cover no-repeat;
             box-shadow: var(--shadow);
         }
 
@@ -471,7 +471,7 @@
                 padding: 104px 0 54px;
                 background:
                     linear-gradient(180deg, rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.55)),
-                    url("{{ asset('images/yammien-hero.png') }}") center / cover no-repeat;
+                    url("<?php echo e(asset('images/yammien-hero.png')); ?>") center / cover no-repeat;
             }
 
             .hero-stats,
@@ -523,7 +523,7 @@
 
             <div class="nav-actions">
                 <a href="#profil" class="btn">Tentang Kami</a>
-                <a href="{{ route('kasir.entry') }}" class="btn btn-primary">
+                <a href="<?php echo e(route('kasir.entry')); ?>" class="btn btn-primary">
                     <i class="fa-solid fa-right-to-bracket"></i> Login Kasir
                 </a>
             </div>
@@ -544,7 +544,7 @@
                         <a href="#menu" class="btn btn-primary">
                             <i class="fa-solid fa-utensils"></i> Lihat Menu
                         </a>
-                        <a href="{{ route('kasir.entry') }}" class="btn">
+                        <a href="<?php echo e(route('kasir.entry')); ?>" class="btn">
                             <i class="fa-solid fa-cash-register"></i> Akses Kasir
                         </a>
                     </div>
@@ -647,7 +647,7 @@
                         <h2>Akses sistem kasir Yammien 12K.</h2>
                         <p>Gunakan URL kasir untuk masuk ke dashboard. Pengguna yang belum login akan diarahkan ke halaman login terlebih dahulu.</p>
                     </div>
-                    <a href="{{ route('kasir.entry') }}" class="btn btn-primary">
+                    <a href="<?php echo e(route('kasir.entry')); ?>" class="btn btn-primary">
                         <i class="fa-solid fa-lock"></i> Buka URL Kasir
                     </a>
                 </div>
@@ -663,3 +663,4 @@
     </footer>
 </body>
 </html>
+<?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/welcome.blade.php ENDPATH**/ ?>

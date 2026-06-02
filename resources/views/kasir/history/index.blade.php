@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Riwayat Penjualan - Admin MeTime')
+@section('title', 'Riwayat Penjualan - Admin Yammien 12K')
 
 @push('styles')
     <style>

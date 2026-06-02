@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Aktivitas Log - Admin Yammien 12K'); ?>
 
-@section('title', 'Aktivitas Log - Admin Yammien 12K')
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
         * {
             margin: 0;
@@ -271,23 +269,23 @@
             }
         }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
-<h2>Log Aktivitas {{ Auth::user()->role == 'admin' ? 'Admin' : 'User' }}</h2>
+<?php $__env->startSection('content'); ?>
+<h2>Log Aktivitas <?php echo e(Auth::user()->role == 'admin' ? 'Admin' : 'User'); ?></h2>
 
             <div class="export-bar">
-                <a href="{{ route('activity-logs.export-pdf', ['date' => request('date')]) }}" class="export-btn pdf">📄 Ekspor PDF</a>
-                <a href="{{ route('activity-logs.export-excel', ['date' => request('date')]) }}" class="export-btn excel">📊 Ekspor Excel</a>
+                <a href="<?php echo e(route('activity-logs.export-pdf', ['date' => request('date')])); ?>" class="export-btn pdf">📄 Ekspor PDF</a>
+                <a href="<?php echo e(route('activity-logs.export-excel', ['date' => request('date')])); ?>" class="export-btn excel">📊 Ekspor Excel</a>
             </div>
 
-            <form action="{{ route('activity-logs.index') }}" method="GET" class="search-bar">
+            <form action="<?php echo e(route('activity-logs.index')); ?>" method="GET" class="search-bar">
                 <label for="search-activity">Cari tanggal:</label>
-                <input type="date" id="search-activity" name="date" class="search-input" value="{{ request('date') }}" />
+                <input type="date" id="search-activity" name="date" class="search-input" value="<?php echo e(request('date')); ?>" />
                 <button type="submit" class="btn-search">Cari</button>
-                @if(request('date'))
-                    <a href="{{ route('activity-logs.index') }}" class="btn-search" style="background-color: #6b7280;">Reset</a>
-                @endif
+                <?php if(request('date')): ?>
+                    <a href="<?php echo e(route('activity-logs.index')); ?>" class="btn-search" style="background-color: #6b7280;">Reset</a>
+                <?php endif; ?>
             </form>
 
             <section class="activity-log">
@@ -302,66 +300,68 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($activityLogs as $index => $log)
+                        <?php $__empty_1 = true; $__currentLoopData = $activityLogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $log): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr>
-                                <td>{{ ($activityLogs->currentPage() - 1) * $activityLogs->perPage() + $index + 1 }}</td>
-                                <td>{{ $log->created_at->format('Y-m-d H:i') }}</td>
-                                <td>{{ $log->user->fullname ?? $log->user->name ?? 'Unknown' }}</td>
-                                <td>{{ $log->description }}</td>
+                                <td><?php echo e(($activityLogs->currentPage() - 1) * $activityLogs->perPage() + $index + 1); ?></td>
+                                <td><?php echo e($log->created_at->format('Y-m-d H:i')); ?></td>
+                                <td><?php echo e($log->user->fullname ?? $log->user->name ?? 'Unknown'); ?></td>
+                                <td><?php echo e($log->description); ?></td>
                                 <td>
-                                    @if($log->activity_type == 'login')
+                                    <?php if($log->activity_type == 'login'): ?>
                                         <span class="status success">Berhasil</span>
-                                    @elseif($log->activity_type == 'logout')
+                                    <?php elseif($log->activity_type == 'logout'): ?>
                                         <span class="status danger">Logout</span>
-                                    @elseif($log->activity_type == 'make order')
+                                    <?php elseif($log->activity_type == 'make order'): ?>
                                         <span class="status info">Pesanan</span>
-                                    @elseif($log->activity_type == 'check payment')
+                                    <?php elseif($log->activity_type == 'check payment'): ?>
                                         <span class="status warning">Pembayaran</span>
-                                    @elseif ($log->activity_type == 'update')
+                                    <?php elseif($log->activity_type == 'update'): ?>
                                         <span class="status info">Diperbarui</span>
-                                    @elseif(str_contains($log->description, 'Menghapus') || str_contains($log->description, 'hapus'))
+                                    <?php elseif(str_contains($log->description, 'Menghapus') || str_contains($log->description, 'hapus')): ?>
                                         <span class="status warning">Dihapus</span>
-                                    @elseif(str_contains($log->description, 'Menambahkan') || str_contains($log->description, 'tambah'))
+                                    <?php elseif(str_contains($log->description, 'Menambahkan') || str_contains($log->description, 'tambah')): ?>
                                         <span class="status info">Ditambahkan</span>
-                                    @elseif(str_contains($log->description, 'Mengupdate') || str_contains($log->description, 'Edit'))
+                                    <?php elseif(str_contains($log->description, 'Mengupdate') || str_contains($log->description, 'Edit')): ?>
                                         <span class="status info">Diperbarui</span>
-                                    @else
+                                    <?php else: ?>
                                         <span class="status info">Info</span>
-                                    @endif
+                                    <?php endif; ?>
                                 </td>
                             </tr>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <tr>
                                 <td colspan="5" style="text-align: center; padding: 40px; color: #999;">
                                     Belum ada log aktivitas.
                                 </td>
                             </tr>
-                        @endforelse
+                        <?php endif; ?>
                     </tbody>
                 </table>
 
-                @if($activityLogs->hasPages())
+                <?php if($activityLogs->hasPages()): ?>
                     <div class="pagination">
-                        @if ($activityLogs->onFirstPage())
+                        <?php if($activityLogs->onFirstPage()): ?>
                             <span>&laquo;</span>
-                        @else
-                            <a href="{{ $activityLogs->previousPageUrl() }}&date={{ request('date') }}">&laquo;</a>
-                        @endif
+                        <?php else: ?>
+                            <a href="<?php echo e($activityLogs->previousPageUrl()); ?>&date=<?php echo e(request('date')); ?>">&laquo;</a>
+                        <?php endif; ?>
 
-                        @foreach ($activityLogs->getUrlRange(1, $activityLogs->lastPage()) as $page => $url)
-                            @if ($page == $activityLogs->currentPage())
-                                <span class="active">{{ $page }}</span>
-                            @else
-                                <a href="{{ $url }}&date={{ request('date') }}">{{ $page }}</a>
-                            @endif
-                        @endforeach
+                        <?php $__currentLoopData = $activityLogs->getUrlRange(1, $activityLogs->lastPage()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($page == $activityLogs->currentPage()): ?>
+                                <span class="active"><?php echo e($page); ?></span>
+                            <?php else: ?>
+                                <a href="<?php echo e($url); ?>&date=<?php echo e(request('date')); ?>"><?php echo e($page); ?></a>
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                        @if ($activityLogs->hasMorePages())
-                            <a href="{{ $activityLogs->nextPageUrl() }}&date={{ request('date') }}">&raquo;</a>
-                        @else
+                        <?php if($activityLogs->hasMorePages()): ?>
+                            <a href="<?php echo e($activityLogs->nextPageUrl()); ?>&date=<?php echo e(request('date')); ?>">&raquo;</a>
+                        <?php else: ?>
                             <span>&raquo;</span>
-                        @endif
+                        <?php endif; ?>
                     </div>
-                @endif
+                <?php endif; ?>
             </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/activity-logs/index.blade.php ENDPATH**/ ?>

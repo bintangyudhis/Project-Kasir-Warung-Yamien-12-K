@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Menu - MeTime')
+@section('title', 'Tambah Menu - Yammien 12K')
 
 @push('styles')
 <style>

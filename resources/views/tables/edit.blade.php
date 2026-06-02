@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Edit Meja - MeTime')
+@section('title', 'Edit Meja - Yammien 12K')
 
 @push('styles')
 <style>

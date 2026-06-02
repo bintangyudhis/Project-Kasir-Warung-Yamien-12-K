@@ -1,8 +1,6 @@
-@extends('layouts.kasir')
+<?php $__env->startSection('title', 'Menu - Kasir Yammien 12K'); ?>
 
-@section('title', 'Menu - Kasir Yammien 12K')
-
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     .kasir-menu-shell {
         display: flex;
@@ -452,9 +450,9 @@
         }
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section class="kasir-menu-shell">
         <div class="kasir-menu-head">
             <div class="kasir-menu-title">
@@ -462,122 +460,126 @@
                 <p>Pilih menu, filter kategori, lalu tambahkan ke pesanan.</p>
             </div>
 
-            <form action="{{ route('orders.index') }}" method="GET" class="search-bar">
-                <input type="text" name="search" placeholder="Cari menu" value="{{ request('search') }}" />
-                <input type="hidden" name="category" value="{{ request('category', 'semua') }}" />
+            <form action="<?php echo e(route('orders.index')); ?>" method="GET" class="search-bar">
+                <input type="text" name="search" placeholder="Cari menu" value="<?php echo e(request('search')); ?>" />
+                <input type="hidden" name="category" value="<?php echo e(request('category', 'semua')); ?>" />
                 <button type="submit" aria-label="Cari menu"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
 
         <div class="kategori-buttons">
-            <a href="{{ route('orders.index', ['category' => 'semua', 'search' => request('search')]) }}">
-                <button type="button" class="{{ request('category', 'semua') == 'semua' ? 'active' : '' }}">Semua</button>
+            <a href="<?php echo e(route('orders.index', ['category' => 'semua', 'search' => request('search')])); ?>">
+                <button type="button" class="<?php echo e(request('category', 'semua') == 'semua' ? 'active' : ''); ?>">Semua</button>
             </a>
 
-            @foreach ($categories as $category)
-                @php
+            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php
                     $categoryName = strtolower($category->name);
-                @endphp
+                ?>
 
-                <a href="{{ route('orders.index', ['category' => $categoryName, 'search' => request('search')]) }}">
-                    <button type="button" class="{{ request('category') == $categoryName ? 'active' : '' }}">
-                        {{ $category->name }}
+                <a href="<?php echo e(route('orders.index', ['category' => $categoryName, 'search' => request('search')])); ?>">
+                    <button type="button" class="<?php echo e(request('category') == $categoryName ? 'active' : ''); ?>">
+                        <?php echo e($category->name); ?>
+
                     </button>
                 </a>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
 
         <section class="menu-list">
             <h3>Menu</h3>
             <div class="menu-grid">
-                @forelse ($products as $product)
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <article class="menu-card">
                         <div class="menu-card-media">
-                            @if ($product->photo)
-                                <img src="{{ asset('storage/' . $product->photo) }}" alt="{{ $product->name }}">
-                            @else
+                            <?php if($product->photo): ?>
+                                <img src="<?php echo e(asset('storage/' . $product->photo)); ?>" alt="<?php echo e($product->name); ?>">
+                            <?php else: ?>
                                 <div class="img-placeholder">
                                     <i class="fa-solid fa-utensils"></i>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
 
                         <div class="menu-card-body">
-                            <p class="title">{{ $product->name }}</p>
-                            <p class="price">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
-                            <p class="status {{ $product->stock_quantity > 0 ? '' : 'is-empty' }}">
-                                {{ $product->stock_quantity > 0 ? 'Tersedia' : 'Tidak tersedia' }}
+                            <p class="title"><?php echo e($product->name); ?></p>
+                            <p class="price">Rp<?php echo e(number_format($product->price, 0, ',', '.')); ?></p>
+                            <p class="status <?php echo e($product->stock_quantity > 0 ? '' : 'is-empty'); ?>">
+                                <?php echo e($product->stock_quantity > 0 ? 'Tersedia' : 'Tidak tersedia'); ?>
+
                             </p>
 
-                            @if ($product->stock_quantity > 0)
-                                <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                                    @csrf
+                            <?php if($product->stock_quantity > 0): ?>
+                                <form action="<?php echo e(route('cart.add', $product->id)); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
                                     <button type="submit" class="btn-add-cart">Tambah</button>
                                 </form>
-                            @endif
+                            <?php endif; ?>
                         </div>
                     </article>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <div class="empty-menu">
                         Belum ada produk.
                     </div>
-                @endforelse
+                <?php endif; ?>
             </div>
         </section>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('right-sidebar')
+<?php $__env->startSection('right-sidebar'); ?>
     <aside class="order-section">
         <h3>Pesanan</h3>
 
         <div class="order-items">
-            @forelse ($cart as $id => $item)
+            <?php $__empty_1 = true; $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="order-item">
                     <div class="img-placeholder small">
-                        @if (isset($item['photo']) && $item['photo'])
-                            <img src="{{ asset('storage/' . $item['photo']) }}" alt="{{ $item['name'] }}">
-                        @endif
+                        <?php if(isset($item['photo']) && $item['photo']): ?>
+                            <img src="<?php echo e(asset('storage/' . $item['photo'])); ?>" alt="<?php echo e($item['name']); ?>">
+                        <?php endif; ?>
                     </div>
 
                     <div class="order-info">
-                        <p class="item-name">{{ $item['name'] }}</p>
-                        <p class="item-price">Rp{{ number_format($item['price'], 0, ',', '.') }}</p>
+                        <p class="item-name"><?php echo e($item['name']); ?></p>
+                        <p class="item-price">Rp<?php echo e(number_format($item['price'], 0, ',', '.')); ?></p>
                     </div>
 
                     <div class="qty-control">
-                        <form action="{{ route('cart.update', $id) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" required>
+                        <form action="<?php echo e(route('cart.update', $id)); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('PATCH'); ?>
+                            <input type="number" name="quantity" value="<?php echo e($item['quantity']); ?>" min="1" required>
                             <button type="submit" class="btn-update">Update</button>
                         </form>
 
-                        <form action="{{ route('cart.remove', $id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                        <form action="<?php echo e(route('cart.remove', $id)); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="btn-remove">Hapus</button>
                         </form>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div class="order-empty">
                     Keranjang masih kosong.
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
 
-        @if (!empty($cart))
+        <?php if(!empty($cart)): ?>
             <div class="order-total">
                 <p>Total</p>
-                <p>Rp {{ number_format($totalAmount) }}</p>
+                <p>Rp <?php echo e(number_format($totalAmount)); ?></p>
             </div>
 
-            <a href="{{ route('orders.create') }}">
+            <a href="<?php echo e(route('orders.create')); ?>">
                 <button class="btn-pay">
                     Lanjutkan Pembayaran
                 </button>
             </a>
-        @endif
+        <?php endif; ?>
     </aside>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.kasir', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/kasir/menu/index.blade.php ENDPATH**/ ?>

@@ -1,7 +1,6 @@
-@extends('layouts.admin')
-@section('title', 'Manajemen Akun')
+<?php $__env->startSection('title', 'Manajemen Akun'); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     .am-wrap {
         width: 100%;
@@ -515,9 +514,9 @@
         }
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="am-wrap">
     <div class="am-header">
         <div class="am-header-icon">
@@ -532,14 +531,14 @@
                 <div class="am-card-label">
                     <i class="fas fa-plus"></i> Buat Akun
                 </div>
-                <a href="{{ route('users.create') }}" class="am-btn-add">
+                <a href="<?php echo e(route('users.create')); ?>" class="am-btn-add">
                     <i class="fas fa-plus-circle"></i> Tambah Akun Baru
                 </a>
             </div>
 
             <div class="am-stats">
                 <div>
-                    <span class="am-stats-num">{{ $users->total() }}</span>
+                    <span class="am-stats-num"><?php echo e($users->total()); ?></span>
                     <span class="am-stats-lbl">Akun Terdaftar</span>
                 </div>
             </div>
@@ -557,7 +556,7 @@
         </aside>
 
         <main class="am-main-card">
-            <form action="{{ route('users.index') }}" method="GET">
+            <form action="<?php echo e(route('users.index')); ?>" method="GET">
                 <div class="am-toolbar">
                     <div class="am-search-wrap">
                         <i class="fas fa-search"></i>
@@ -566,14 +565,14 @@
                             name="search"
                             class="am-input"
                             placeholder="Cari nama atau username..."
-                            value="{{ request('search') }}"
+                            value="<?php echo e(request('search')); ?>"
                         >
                     </div>
                     <div class="am-filter-wrap">
                         <select name="role" class="am-select" onchange="this.form.submit()">
                             <option value="">Semua Peran</option>
-                            <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="cashier" {{ request('role') == 'cashier' ? 'selected' : '' }}>Kasir</option>
+                            <option value="admin" <?php echo e(request('role') == 'admin' ? 'selected' : ''); ?>>Admin</option>
+                            <option value="cashier" <?php echo e(request('role') == 'cashier' ? 'selected' : ''); ?>>Kasir</option>
                         </select>
                     </div>
                     <button type="submit" class="am-btn-search">
@@ -587,13 +586,13 @@
                     <thead>
                         <tr>
                             <th>
-                                <a href="{{ request()->fullUrlWithQuery(['sort' => request('sort') == 'asc' ? 'desc' : 'asc']) }}">
+                                <a href="<?php echo e(request()->fullUrlWithQuery(['sort' => request('sort') == 'asc' ? 'desc' : 'asc'])); ?>">
                                     ID
-                                    @if(request('sort') == 'asc')
+                                    <?php if(request('sort') == 'asc'): ?>
                                         <i class="fas fa-caret-up"></i>
-                                    @else
+                                    <?php else: ?>
                                         <i class="fas fa-caret-down"></i>
-                                    @endif
+                                    <?php endif; ?>
                                 </a>
                             </th>
                             <th class="tc">Foto</th>
@@ -605,47 +604,48 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr>
-                                <td>#{{ $user->id }}</td>
+                                <td>#<?php echo e($user->id); ?></td>
                                 <td class="tc">
-                                    @if ($user->photo)
-                                        <img src="{{ asset('storage/' . $user->photo) }}" class="am-avatar" alt="Foto {{ $user->username }}">
-                                    @else
+                                    <?php if($user->photo): ?>
+                                        <img src="<?php echo e(asset('storage/' . $user->photo)); ?>" class="am-avatar" alt="Foto <?php echo e($user->username); ?>">
+                                    <?php else: ?>
                                         <div class="am-avatar-placeholder">
                                             <i class="fas fa-user"></i>
                                         </div>
-                                    @endif
+                                    <?php endif; ?>
                                 </td>
-                                <td><span class="am-uname am-cell-text">{{ $user->username }}</span></td>
-                                <td><span class="am-cell-text">{{ $user->fullname }}</span></td>
-                                <td title="{{ $user->email }}"><span class="am-cell-text">{{ $user->email }}</span></td>
+                                <td><span class="am-uname am-cell-text"><?php echo e($user->username); ?></span></td>
+                                <td><span class="am-cell-text"><?php echo e($user->fullname); ?></span></td>
+                                <td title="<?php echo e($user->email); ?>"><span class="am-cell-text"><?php echo e($user->email); ?></span></td>
                                 <td class="tc">
-                                    <span class="am-badge {{ $user->role === 'admin' ? 'am-badge-admin' : 'am-badge-kasir' }}">
-                                        {{ ucfirst($user->role) }}
+                                    <span class="am-badge <?php echo e($user->role === 'admin' ? 'am-badge-admin' : 'am-badge-kasir'); ?>">
+                                        <?php echo e(ucfirst($user->role)); ?>
+
                                     </span>
                                 </td>
                                 <td class="tc">
                                     <div class="am-actions">
-                                        <a href="{{ route('users.edit', $user->id) }}" class="am-btn-icon am-btn-edit" title="Edit {{ $user->username }}">
+                                        <a href="<?php echo e(route('users.edit', $user->id)); ?>" class="am-btn-icon am-btn-edit" title="Edit <?php echo e($user->username); ?>">
                                             <i class="fas fa-pen"></i>
                                         </a>
                                         <form
-                                            action="{{ route('users.destroy', $user->id) }}"
+                                            action="<?php echo e(route('users.destroy', $user->id)); ?>"
                                             method="POST"
                                             style="display:inline;"
-                                            onsubmit="return confirm('Hapus akun {{ $user->username }}?')"
+                                            onsubmit="return confirm('Hapus akun <?php echo e($user->username); ?>?')"
                                         >
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="am-btn-icon am-btn-del" title="Hapus {{ $user->username }}">
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('DELETE'); ?>
+                                            <button type="submit" class="am-btn-icon am-btn-del" title="Hapus <?php echo e($user->username); ?>">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
                                     </div>
                                 </td>
                             </tr>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <tr>
                                 <td colspan="7">
                                     <div class="am-empty">
@@ -654,57 +654,58 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforelse
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
 
             <div class="am-mobile-list">
-                @forelse ($users as $user)
+                <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <article class="am-user-card">
                         <div class="am-user-top">
-                            @if ($user->photo)
-                                <img src="{{ asset('storage/' . $user->photo) }}" class="am-avatar" alt="Foto {{ $user->username }}">
-                            @else
+                            <?php if($user->photo): ?>
+                                <img src="<?php echo e(asset('storage/' . $user->photo)); ?>" class="am-avatar" alt="Foto <?php echo e($user->username); ?>">
+                            <?php else: ?>
                                 <div class="am-avatar-placeholder">
                                     <i class="fas fa-user"></i>
                                 </div>
-                            @endif
+                            <?php endif; ?>
 
                             <div class="am-user-main">
-                                <strong class="am-uname">{{ $user->username }}</strong>
-                                <span>{{ $user->fullname }}</span>
+                                <strong class="am-uname"><?php echo e($user->username); ?></strong>
+                                <span><?php echo e($user->fullname); ?></span>
                             </div>
 
-                            <span class="am-badge {{ $user->role === 'admin' ? 'am-badge-admin' : 'am-badge-kasir' }}">
-                                {{ ucfirst($user->role) }}
+                            <span class="am-badge <?php echo e($user->role === 'admin' ? 'am-badge-admin' : 'am-badge-kasir'); ?>">
+                                <?php echo e(ucfirst($user->role)); ?>
+
                             </span>
                         </div>
 
                         <div class="am-user-meta">
                             <div>
                                 <span>ID</span>
-                                <strong>#{{ $user->id }}</strong>
+                                <strong>#<?php echo e($user->id); ?></strong>
                             </div>
                             <div>
                                 <span>Email</span>
-                                <strong title="{{ $user->email }}">{{ $user->email }}</strong>
+                                <strong title="<?php echo e($user->email); ?>"><?php echo e($user->email); ?></strong>
                             </div>
                             <div>
                                 <span>Aksi</span>
                                 <span class="am-actions">
-                                    <a href="{{ route('users.edit', $user->id) }}" class="am-btn-icon am-btn-edit" title="Edit {{ $user->username }}">
+                                    <a href="<?php echo e(route('users.edit', $user->id)); ?>" class="am-btn-icon am-btn-edit" title="Edit <?php echo e($user->username); ?>">
                                         <i class="fas fa-pen"></i>
                                     </a>
                                     <form
-                                        action="{{ route('users.destroy', $user->id) }}"
+                                        action="<?php echo e(route('users.destroy', $user->id)); ?>"
                                         method="POST"
                                         style="display:inline;"
-                                        onsubmit="return confirm('Hapus akun {{ $user->username }}?')"
+                                        onsubmit="return confirm('Hapus akun <?php echo e($user->username); ?>?')"
                                     >
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="am-btn-icon am-btn-del" title="Hapus {{ $user->username }}">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
+                                        <button type="submit" class="am-btn-icon am-btn-del" title="Hapus <?php echo e($user->username); ?>">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
@@ -712,41 +713,44 @@
                             </div>
                         </div>
                     </article>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <div class="am-empty">
                         <i class="fas fa-folder-open"></i>
                         <p>Tidak ada data ditemukan</p>
                     </div>
-                @endforelse
+                <?php endif; ?>
             </div>
 
             <div class="am-pagination">
                 <div class="am-page-info">
-                    Data {{ $users->firstItem() ?? 0 }} - {{ $users->lastItem() ?? 0 }} dari {{ $users->total() }}
+                    Data <?php echo e($users->firstItem() ?? 0); ?> - <?php echo e($users->lastItem() ?? 0); ?> dari <?php echo e($users->total()); ?>
+
                 </div>
                 <div class="am-page-ctrl">
-                    @if ($users->onFirstPage())
+                    <?php if($users->onFirstPage()): ?>
                         <span class="am-page-btn am-page-btn--disabled">
                             <i class="fas fa-chevron-left"></i>
                         </span>
-                    @else
-                        <a href="{{ $users->previousPageUrl() }}" class="am-page-btn">
+                    <?php else: ?>
+                        <a href="<?php echo e($users->previousPageUrl()); ?>" class="am-page-btn">
                             <i class="fas fa-chevron-left"></i>
                         </a>
-                    @endif
+                    <?php endif; ?>
 
-                    @if ($users->hasMorePages())
-                        <a href="{{ $users->nextPageUrl() }}" class="am-page-btn">
+                    <?php if($users->hasMorePages()): ?>
+                        <a href="<?php echo e($users->nextPageUrl()); ?>" class="am-page-btn">
                             <i class="fas fa-chevron-right"></i>
                         </a>
-                    @else
+                    <?php else: ?>
                         <span class="am-page-btn am-page-btn--disabled">
                             <i class="fas fa-chevron-right"></i>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </main>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/users/index.blade.php ENDPATH**/ ?>
