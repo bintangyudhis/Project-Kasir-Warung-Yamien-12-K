@@ -33,7 +33,7 @@
       color: var(--white);
       background:
         linear-gradient(90deg, rgba(12, 14, 19, 0.86) 0%, rgba(12, 14, 19, 0.58) 48%, rgba(12, 14, 19, 0.2) 100%),
-        url("{{ asset('images/yammien-hero.png') }}") center / cover no-repeat;
+        url("<?php echo e(asset('images/yammien-hero.png')); ?>") center / cover no-repeat;
     }
 
     a {
@@ -294,7 +294,7 @@
       body {
         background:
           linear-gradient(180deg, rgba(12, 14, 19, 0.92) 0%, rgba(12, 14, 19, 0.64) 100%),
-          url("{{ asset('images/yammien-hero.png') }}") center / cover no-repeat;
+          url("<?php echo e(asset('images/yammien-hero.png')); ?>") center / cover no-repeat;
       }
 
       .login-main {
@@ -343,8 +343,8 @@
 <body>
   <div class="login-shell">
     <header class="topbar" aria-label="Navigasi login">
-      <a href="{{ url('/') }}" class="brand">Yammien 12K</a>
-      <a href="{{ url('/') }}" class="home-link">Beranda</a>
+      <a href="<?php echo e(url('/')); ?>" class="brand">Yammien 12K</a>
+      <a href="<?php echo e(url('/')); ?>" class="home-link">Beranda</a>
     </header>
 
     <main class="login-main">
@@ -359,8 +359,8 @@
         <h2>Selamat datang.</h2>
         <p class="login-subtitle">Gunakan akun admin atau kasir yang sudah terdaftar untuk masuk ke sistem Yammien 12K.</p>
 
-        <form method="POST" action="{{ route('login') }}">
-          @csrf
+        <form method="POST" action="<?php echo e(route('login')); ?>">
+          <?php echo csrf_field(); ?>
 
           <div class="field-group">
             <label class="field-label" for="email">Email</label>
@@ -369,15 +369,22 @@
               type="email"
               name="email"
               placeholder="nama@email.com"
-              value="{{ old('email') }}"
+              value="<?php echo e(old('email')); ?>"
               required
               autofocus
               autocomplete="username"
               class="input-field"
             />
-            @error('email')
-              <div class="error-message">{{ $message }}</div>
-            @enderror
+            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+              <div class="error-message"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
           </div>
 
           <div class="field-group">
@@ -411,9 +418,16 @@
                 </svg>
               </button>
             </div>
-            @error('password')
-              <div class="error-message">{{ $message }}</div>
-            @enderror
+            <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+              <div class="error-message"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
           </div>
 
           <button type="submit" class="login-btn">Masuk</button>
@@ -438,3 +452,4 @@
   </script>
 </body>
 </html>
+<?php /**PATH D:\Project-Kasir-Warung-Yamien-12-K\resources\views/auth/login.blade.php ENDPATH**/ ?>

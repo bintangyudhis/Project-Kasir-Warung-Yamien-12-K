@@ -11,7 +11,7 @@
 
 <aside id="sidebar" class="sidebar">
     <div class="brand-lockup">
-        <div class="brand-mark">Y</div>
+        
         <div class="brand-copy">
             <div class="brand-name">Yammien <span>12K</span></div>
             <div class="brand-subtitle">Point of Sale</div>
